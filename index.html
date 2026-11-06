@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <!-- Deixa o site responsivo: a largura da página acompanha a largura do aparelho -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiverso Rick and Morty | Guia de personagens</title>
+  <meta name="description" content="Guia de personagens de Rick and Morty feito com HTML, CSS e JavaScript, consumindo a Rick and Morty API em tempo real.">
+
+  <!-- Fontes do Google: Luckiest Guy (títulos, bem grossa como o logo da série) e Poppins (textos) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Nosso arquivo de estilos -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= TOPO DO SITE (logo + menu) ================= -->
+  <header class="topo">
+    <div class="topo-conteudo">
+      <!-- Logo escrito em texto, no estilo verde com contorno escuro da série -->
+      <a href="#inicio" class="logo" aria-label="Voltar para o início">
+        <span class="logo-linha1">Rick and</span>
+        <span class="logo-linha2">Morty</span>
+      </a>
+
+      <!-- Menu de navegação: cada link leva para uma seção da página -->
+      <nav class="menu" aria-label="Menu principal">
+        <a href="#tempo-real">Tempo real</a>
+        <a href="#serie">A série</a>
+        <a href="#personagens">Personagens</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ================= SEÇÃO INICIAL (hero) ================= -->
+    <section id="inicio" class="hero">
+      <div class="hero-texto">
+        <p class="hero-chamada">Wubba Lubba Dub Dub!</p>
+        <h1 class="hero-titulo">Multiverso<br>Rick and Morty</h1>
+        <p class="hero-descricao">
+          Um guia de personagens que busca os dados direto da Rick and Morty API.
+          Pesquise pelo nome, filtre pelo status e guarde seus favoritos.
+        </p>
+        <a href="#personagens" class="botao botao-principal">Entrar no portal</a>
+      </div>
+
+      <!-- Portal desenhado só com CSS. Os avatares do Rick e do Morty entram aqui pelo JavaScript -->
+      <div class="portal" aria-hidden="true">
+        <div class="portal-anel"></div>
+        <div class="portal-interno" id="portal-interno"></div>
+      </div>
+    </section>
+
+    <!-- ================= DADOS EM TEMPO REAL ================= -->
+    <section id="tempo-real" class="secao">
+      <h2 class="secao-titulo">Dados em tempo real</h2>
+      <p class="secao-intro">
+        Esses números são consultados na API toda vez que a página abre.
+        Se o banco de dados dela mudar, o valor aqui muda junto.
+      </p>
+
+      <!-- Os números começam em 0 e o JavaScript troca pelo valor que vem da API -->
+      <div class="estatisticas">
+        <div class="estatistica">
+          <span class="estatistica-numero" id="total-personagens">0</span>
+          <span class="estatistica-rotulo">Personagens</span>
+        </div>
+        <div class="estatistica">
+          <span class="estatistica-numero" id="total-locais">0</span>
+          <span class="estatistica-rotulo">Localizações</span>
+        </div>
+        <div class="estatistica">
+          <span class="estatistica-numero" id="total-episodios">0</span>
+          <span class="estatistica-rotulo">Episódios</span>
+        </div>
+        <div class="estatistica estatistica-vivo">
+          <span class="estatistica-numero" id="total-vivos">0</span>
+          <span class="estatistica-rotulo">Vivos</span>
+        </div>
+        <div class="estatistica estatistica-morto">
+          <span class="estatistica-numero" id="total-mortos">0</span>
+          <span class="estatistica-rotulo">Mortos</span>
+        </div>
+        <div class="estatistica estatistica-desconhecido">
+          <span class="estatistica-numero" id="total-desconhecidos">0</span>
+          <span class="estatistica-rotulo">Status desconhecido</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SOBRE A SÉRIE ================= -->
+    <section id="serie" class="secao">
+      <h2 class="secao-titulo">Sobre a série</h2>
+
+      <div class="sobre-grade">
+        <article class="sobre-card">
+          <h3>Quem criou</h3>
+          <p>
+            Justin Roiland e Dan Harmon. A série estreou em 2 de dezembro de 2013,
+            no bloco Adult Swim do Cartoon Network.
+          </p>
+        </article>
+
+        <article class="sobre-card">
+          <h3>A história</h3>
+          <p>
+            Rick Sanchez é um cientista genial e meio irresponsável. Ele arrasta o neto,
+            Morty Smith, para aventuras por outros planetas e dimensões.
+          </p>
+        </article>
+
+        <article class="sobre-card">
+          <h3>De onde veio</h3>
+          <p>
+            Os dois personagens nasceram em uma paródia de De Volta para o Futuro,
+            feita por Roiland em 2006 para o festival de curtas Channel 101, que Harmon fundou.
+          </p>
+        </article>
+      </div>
+
+      <!-- Paleta de cores do site, tirada das cores do desenho -->
+      <h3 class="paleta-titulo">Paleta de cores deste site</h3>
+      <ul class="paleta">
+        <li><span class="amostra" style="background:#97ce4c"></span>Verde do portal<small>#97ce4c</small></li>
+        <li><span class="amostra" style="background:#bee5fd"></span>Azul do cabelo do Rick<small>#bee5fd</small></li>
+        <li><span class="amostra" style="background:#fff874"></span>Amarelo da camiseta do Morty<small>#fff874</small></li>
+        <li><span class="amostra" style="background:#f675da"></span>Rosa da Summer<small>#f675da</small></li>
+        <li><span class="amostra" style="background:#3a4767"></span>Azul da calça do Morty<small>#3a4767</small></li>
+      </ul>
+    </section>
+
+    <!-- ================= PERSONAGENS (cards vindos da API) ================= -->
+    <section id="personagens" class="secao">
+      <h2 class="secao-titulo">Personagens</h2>
+      <p class="secao-intro">
+        Cada card abaixo é montado pelo JavaScript com os dados da API.
+        No HTML existe só a área vazia onde eles entram.
+      </p>
+
+      <!-- Barra de filtros: busca por nome, filtro de status e botão de favoritos -->
+      <div class="filtros">
+        <div class="campo">
+          <label for="campo-busca">Buscar por nome</label>
+          <input type="search" id="campo-busca" placeholder="Ex.: Rick, Morty, Summer..." autocomplete="off">
+        </div>
+
+        <div class="campo">
+          <label for="campo-status">Status</label>
+          <select id="campo-status">
+            <option value="">Todos</option>
+            <option value="alive">Vivo</option>
+            <option value="dead">Morto</option>
+            <option value="unknown">Desconhecido</option>
+          </select>
+        </div>
+
+        <button type="button" id="botao-favoritos" class="botao botao-favoritos" aria-pressed="false">
+          Meus favoritos (0)
+        </button>
+      </div>
+
+      <!-- Mensagens de aviso (nenhum resultado, erro de conexão etc.). Fica escondida até precisar -->
+      <p id="mensagem" class="mensagem" role="status" hidden></p>
+
+      <!-- Indicador de carregamento. Também fica escondido até precisar -->
+      <div id="carregando" class="carregando" hidden>
+        <span class="carregando-bolinha"></span>
+        <span>Abrindo o portal...</span>
+      </div>
+
+      <!-- AQUI é onde o JavaScript vai colocar os cards. Começa vazia de propósito -->
+      <div id="grade-cards" class="grade-cards" aria-live="polite"></div>
+
+      <!-- Paginação: a API entrega 20 personagens por página -->
+      <div class="paginacao" id="paginacao">
+        <button type="button" id="botao-anterior" class="botao">&laquo; Anterior</button>
+        <span id="texto-pagina" class="paginacao-texto">Página 1</span>
+        <button type="button" id="botao-proxima" class="botao">Próxima &raquo;</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= RODAPÉ ================= -->
+  <footer class="rodape">
+    <p class="rodape-destaque">Projeto acadêmico de Jéssica Bianca da Silva, RA 160289</p>
+    <p>Análise e Desenvolvimento de Sistemas, UniFECAF. Disciplina de Web Development Front-End.</p>
+    <p class="rodape-pequeno">
+      Dados fornecidos pela <a href="https://rickandmortyapi.com/" target="_blank" rel="noopener">The Rick and Morty API</a>.
+      Rick and Morty pertence à Adult Swim / Warner Bros. Discovery. Este site não tem fins comerciais.
+    </p>
+  </footer>
+
+  <!-- Carrega o JavaScript no final do body, assim o HTML já existe quando o script rodar -->
+  <script src="script.js"></script>
+</body>
+</html>

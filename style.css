@@ -1,0 +1,778 @@
+/* =========================================================
+   Multiverso Rick and Morty - style.css
+   Projeto de Jéssica Bianca da Silva (RA 160289)
+   Estilos feitos só com CSS puro, sem frameworks.
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   1. VARIÁVEIS (cores e fontes que o site inteiro usa)
+   Se quiser mudar uma cor do site, é só mexer aqui.
+   --------------------------------------------------------- */
+:root {
+  /* Cores tiradas do desenho */
+  --verde-portal: #97ce4c;      /* verde do portal e do logo */
+  --verde-escuro: #2f5d12;      /* verde bem escuro, usado em contornos */
+  --azul-rick: #bee5fd;         /* azul do cabelo do Rick */
+  --amarelo-morty: #fff874;     /* amarelo da camiseta do Morty */
+  --rosa-summer: #f675da;       /* rosa da Summer */
+  --azul-calca: #3a4767;        /* azul da calça do Morty */
+
+  /* Cores de fundo e texto (espaço sideral escuro) */
+  --fundo: #0b1322;
+  --painel: #152038;
+  --painel-claro: #1d2b4a;
+  --texto: #eaf2ff;
+  --texto-suave: #a9b8d6;
+
+  /* Cor de cada status do personagem */
+  --cor-vivo: #97ce4c;
+  --cor-morto: #ff6b81;
+  --cor-desconhecido: #fff874;
+
+  /* Fontes (as duas últimas de cada lista são reserva caso o Google Fonts não carregue) */
+  --fonte-titulo: 'Luckiest Guy', 'Arial Black', Impact, sans-serif;
+  --fonte-texto: 'Poppins', 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+
+/* ---------------------------------------------------------
+   2. RESET E BASE
+   Tira as margens padrão do navegador e define o jeito de medir os elementos
+   --------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* padding e borda entram dentro da largura do elemento */
+}
+
+html {
+  scroll-behavior: smooth; /* rolagem suave quando clica nos links do menu */
+  scroll-padding-top: 90px; /* evita que o menu fixo cubra o título da seção */
+}
+
+body {
+  font-family: var(--fonte-texto);
+  color: var(--texto);
+  line-height: 1.6;
+  min-height: 100vh;
+  background-color: var(--fundo);
+  /* Estrelinhas feitas com vários pontos de gradiente + um brilho verde e outro rosa ao fundo */
+  background-image:
+    radial-gradient(1.5px 1.5px at 20px 30px, #ffffff, transparent),
+    radial-gradient(1px 1px at 90px 120px, #bee5fd, transparent),
+    radial-gradient(1.5px 1.5px at 160px 60px, #fff874, transparent),
+    radial-gradient(1px 1px at 230px 180px, #ffffff, transparent),
+    radial-gradient(circle at 15% 0%, rgba(151, 206, 76, 0.18), transparent 45%),
+    radial-gradient(circle at 90% 35%, rgba(246, 117, 218, 0.12), transparent 40%);
+  background-size: 260px 220px, 260px 220px, 260px 220px, 260px 220px, 100% 100%, 100% 100%;
+  background-attachment: fixed;
+}
+
+img {
+  max-width: 100%; /* nenhuma imagem passa do tamanho da tela */
+  display: block;
+}
+
+a {
+  color: var(--verde-portal);
+}
+
+
+/* ---------------------------------------------------------
+   3. TOPO / MENU
+   --------------------------------------------------------- */
+.topo {
+  position: sticky; /* o menu fica grudado no topo quando rola a página */
+  top: 0;
+  z-index: 50;
+  background: rgba(11, 19, 34, 0.88);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid rgba(151, 206, 76, 0.4);
+}
+
+.topo-conteudo {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap; /* em tela pequena o menu vai para a linha de baixo */
+}
+
+/* Logo em duas linhas, verde com contorno escuro, parecido com o da série */
+.logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.9;
+  text-decoration: none;
+  font-family: var(--fonte-titulo);
+  color: var(--verde-portal);
+  text-transform: uppercase;
+  -webkit-text-stroke: 4px var(--verde-escuro);
+  paint-order: stroke fill; /* o contorno fica atrás da letra e não come o preenchimento */
+  text-shadow: 0 0 14px rgba(151, 206, 76, 0.6);
+}
+
+.logo-linha1 { font-size: 1rem; }
+.logo-linha2 { font-size: 1.7rem; }
+
+.menu {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.menu a {
+  color: var(--texto);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 8px 16px;
+  border-radius: 999px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.menu a:hover,
+.menu a:focus-visible {
+  background: var(--verde-portal);
+  color: #10230a;
+}
+
+
+/* ---------------------------------------------------------
+   4. SEÇÃO INICIAL (hero)
+   --------------------------------------------------------- */
+.hero {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px 40px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr; /* texto à esquerda, portal à direita */
+  align-items: center;
+  gap: 40px;
+}
+
+.hero-chamada {
+  display: inline-block;
+  background: var(--rosa-summer);
+  color: #3a0a30;
+  font-weight: 700;
+  padding: 4px 16px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+  transform: rotate(-2deg); /* inclinadinho, bem descontraído */
+}
+
+.hero-titulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 8vw, 5.2rem); /* cresce e diminui conforme a tela */
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--verde-portal);
+  -webkit-text-stroke: 8px var(--verde-escuro);
+  paint-order: stroke fill;
+  text-shadow: 0 0 30px rgba(151, 206, 76, 0.55);
+  margin-bottom: 20px;
+}
+
+.hero-descricao {
+  font-size: 1.1rem;
+  color: var(--texto-suave);
+  max-width: 520px;
+  margin-bottom: 28px;
+}
+
+/* Portal: um anel verde girando com um "buraco" no meio onde ficam os avatares */
+.portal {
+  position: relative;
+  width: min(100%, 380px);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 28px rgba(151, 206, 76, 0.75));
+}
+
+.portal-anel {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #97ce4c, #eaffb0, #4f9a14, #b8f25a, #97ce4c, #eaffb0, #4f9a14, #97ce4c);
+  /* A máscara recorta o centro e deixa só o anel */
+  -webkit-mask: radial-gradient(circle, transparent 56%, #000 58%, #000 70%, transparent 72%);
+  mask: radial-gradient(circle, transparent 56%, #000 58%, #000 70%, transparent 72%);
+  animation: girar 6s linear infinite;
+}
+
+.portal-interno {
+  position: absolute;
+  inset: 14%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, #0f3a14 0%, #06200a 70%);
+  box-shadow: inset 0 0 40px rgba(151, 206, 76, 0.5);
+  overflow: hidden;
+}
+
+/* Avatares do Rick e do Morty (criados pelo JavaScript) */
+.portal-avatar {
+  width: 46%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--verde-portal);
+  background: #0a1020;
+}
+
+.portal-avatar + .portal-avatar {
+  margin-left: -8%; /* o segundo avatar fica meio por cima do primeiro */
+}
+
+/* Animação que faz o anel do portal girar */
+@keyframes girar {
+  to { transform: rotate(360deg); }
+}
+
+
+/* ---------------------------------------------------------
+   5. BOTÕES (usados em vários lugares)
+   --------------------------------------------------------- */
+.botao {
+  font-family: var(--fonte-texto);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 2px solid var(--verde-portal);
+  background: transparent;
+  color: var(--verde-portal);
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.15s, background 0.2s, color 0.2s;
+}
+
+.botao:hover:not(:disabled),
+.botao:focus-visible {
+  background: var(--verde-portal);
+  color: #10230a;
+  transform: translateY(-2px);
+}
+
+.botao:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Botão principal da página inicial, já preenchido de verde */
+.botao-principal {
+  background: var(--verde-portal);
+  color: #10230a;
+  font-size: 1.1rem;
+  padding: 14px 32px;
+  box-shadow: 0 6px 0 var(--verde-escuro);
+}
+
+.botao-principal:hover {
+  background: var(--amarelo-morty);
+  border-color: var(--amarelo-morty);
+}
+
+/* Botão de favoritos tem cor rosa (a mesma do coração dos cards) */
+.botao-favoritos {
+  border-color: var(--rosa-summer);
+  color: var(--rosa-summer);
+}
+
+.botao-favoritos:hover:not(:disabled),
+.botao-favoritos:focus-visible,
+.botao-favoritos[aria-pressed="true"] {
+  background: var(--rosa-summer);
+  color: #3a0a30;
+}
+
+
+/* ---------------------------------------------------------
+   6. SEÇÕES (estrutura geral)
+   --------------------------------------------------------- */
+.secao {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 20px;
+}
+
+.secao-titulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  color: var(--amarelo-morty);
+  letter-spacing: 1px;
+  text-shadow: 3px 3px 0 var(--azul-calca);
+  margin-bottom: 10px;
+}
+
+.secao-intro {
+  color: var(--texto-suave);
+  max-width: 680px;
+  margin-bottom: 28px;
+}
+
+
+/* ---------------------------------------------------------
+   7. ESTATÍSTICAS (dados em tempo real)
+   --------------------------------------------------------- */
+.estatisticas {
+  display: grid;
+  /* Cria quantas colunas couberem, cada uma com no mínimo 150px */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+.estatistica {
+  background: var(--painel);
+  border: 2px solid var(--azul-calca);
+  border-radius: 16px;
+  padding: 20px 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.estatistica-numero {
+  font-family: var(--fonte-titulo);
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--azul-rick);
+}
+
+.estatistica-rotulo {
+  font-size: 0.9rem;
+  color: var(--texto-suave);
+}
+
+/* Cada status tem a cor do respectivo selo dos cards */
+.estatistica-vivo .estatistica-numero { color: var(--cor-vivo); }
+.estatistica-morto .estatistica-numero { color: var(--cor-morto); }
+.estatistica-desconhecido .estatistica-numero { color: var(--cor-desconhecido); }
+
+
+/* ---------------------------------------------------------
+   8. SOBRE A SÉRIE
+   --------------------------------------------------------- */
+.sobre-grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.sobre-card {
+  background: var(--painel);
+  border-left: 6px solid var(--verde-portal);
+  border-radius: 14px;
+  padding: 22px;
+}
+
+.sobre-card h3 {
+  font-family: var(--fonte-titulo);
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: var(--azul-rick);
+  margin-bottom: 8px;
+}
+
+.sobre-card p {
+  color: var(--texto-suave);
+}
+
+/* Paleta de cores */
+.paleta-titulo {
+  margin-top: 40px;
+  margin-bottom: 14px;
+  color: var(--texto);
+  font-size: 1.1rem;
+}
+
+.paleta {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.paleta li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 130px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+}
+
+.paleta small {
+  font-family: monospace;
+  color: var(--texto);
+}
+
+.amostra {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 3px solid var(--texto);
+}
+
+
+/* ---------------------------------------------------------
+   9. FILTROS (busca, status e favoritos)
+   --------------------------------------------------------- */
+.filtros {
+  display: flex;
+  flex-wrap: wrap; /* quebra de linha em tela pequena */
+  align-items: flex-end;
+  gap: 16px;
+  background: var(--painel);
+  border: 2px solid var(--azul-calca);
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 24px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 200px; /* cresce para ocupar o espaço, mas nunca fica menor que 200px */
+}
+
+.campo label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--azul-rick);
+}
+
+.campo input,
+.campo select {
+  width: 100%;    /* ocupa só a largura da caixa, sem estourar no celular */
+  min-width: 0;
+  font-family: var(--fonte-texto);
+  font-size: 1rem;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 2px solid var(--azul-calca);
+  background: var(--fundo);
+  color: var(--texto);
+}
+
+.campo input:focus,
+.campo select:focus {
+  outline: none;
+  border-color: var(--verde-portal);
+  box-shadow: 0 0 0 3px rgba(151, 206, 76, 0.3);
+}
+
+
+/* ---------------------------------------------------------
+   10. MENSAGENS E CARREGAMENTO
+   --------------------------------------------------------- */
+.mensagem {
+  background: rgba(255, 248, 116, 0.1);
+  border: 2px dashed var(--amarelo-morty);
+  color: var(--amarelo-morty);
+  border-radius: 14px;
+  padding: 18px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* O atributo hidden precisa mandar mesmo quando a classe define display */
+.mensagem[hidden],
+.carregando[hidden] {
+  display: none;
+}
+
+.carregando {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 30px;
+  color: var(--verde-portal);
+  font-weight: 600;
+}
+
+.carregando-bolinha {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 5px solid rgba(151, 206, 76, 0.25);
+  border-top-color: var(--verde-portal);
+  animation: girar 0.8s linear infinite;
+}
+
+
+/* ---------------------------------------------------------
+   11. GRADE E CARDS DOS PERSONAGENS
+   --------------------------------------------------------- */
+.grade-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); /* o número de colunas se ajusta sozinho */
+  gap: 22px;
+}
+
+.card {
+  position: relative; /* o coração é posicionado em relação ao card */
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: linear-gradient(180deg, var(--painel-claro), var(--painel));
+  border: 2px solid rgba(151, 206, 76, 0.35);
+  border-radius: 20px;
+  padding: 16px;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  animation: surgir 0.4s ease both; /* o card aparece subindo um pouquinho */
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: var(--verde-portal);
+  box-shadow: 0 12px 30px rgba(151, 206, 76, 0.25);
+}
+
+/* Nome do personagem, em cima e centralizado, igual ao layout pedido */
+.card-titulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.15;
+  text-align: center;
+  color: var(--amarelo-morty);
+  letter-spacing: 0.5px;
+  min-height: 2.3em; /* reserva espaço de 2 linhas para os cards ficarem alinhados */
+  padding: 0 30px; /* abre espaço dos lados para o coração não bater no texto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-wrap: anywhere;
+}
+
+/* Coração de favorito no canto superior direito */
+.card-coracao {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--rosa-summer);
+  font-size: 1.7rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.2s;
+}
+
+.card-coracao:hover,
+.card-coracao:focus-visible {
+  background: rgba(246, 117, 218, 0.2);
+  transform: scale(1.15);
+}
+
+/* Foto do personagem: quadrada com borda verde */
+.card-imagem {
+  width: 100%;
+  height: auto; /* sem isso o height="300" do HTML esticaria a imagem e quebraria o quadrado */
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 3px solid var(--verde-portal);
+  background: var(--fundo);
+}
+
+/* Lista de informações (status, espécie, gênero...) */
+.card-infos {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.card-infos li {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed var(--azul-calca);
+}
+
+.card-infos li:last-child {
+  border-bottom: none;
+}
+
+.info-rotulo {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--azul-rick);
+}
+
+.info-valor {
+  color: var(--texto);
+  overflow-wrap: anywhere; /* nomes de lugares compridos quebram em vez de estourar o card */
+}
+
+/* Selinho de status com bolinha colorida */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.status::before {
+  content: '';
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.status-vivo { color: var(--cor-vivo); }
+.status-morto { color: var(--cor-morto); }
+.status-desconhecido { color: var(--cor-desconhecido); }
+
+@keyframes surgir {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ---------------------------------------------------------
+   12. PAGINAÇÃO
+   --------------------------------------------------------- */
+.paginacao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.paginacao[hidden] {
+  display: none;
+}
+
+.paginacao-texto {
+  font-weight: 600;
+  color: var(--azul-rick);
+}
+
+
+/* ---------------------------------------------------------
+   13. RODAPÉ
+   --------------------------------------------------------- */
+.rodape {
+  margin-top: 40px;
+  padding: 36px 20px;
+  text-align: center;
+  background: #070d19;
+  border-top: 3px solid var(--verde-portal);
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+}
+
+.rodape-destaque {
+  color: var(--amarelo-morty);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.rodape-pequeno {
+  margin-top: 12px;
+  font-size: 0.78rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* ---------------------------------------------------------
+   14. RESPONSIVO
+   Ajustes para tablet e celular
+   --------------------------------------------------------- */
+
+/* Tablet e telas menores: o hero vira uma coluna só, com o portal embaixo do texto */
+@media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 40px;
+  }
+
+  .hero-descricao {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .portal {
+    width: min(80%, 320px);
+  }
+}
+
+/* Celular: menu centralizado, espaçamentos menores e cards em duas colunas quando der */
+@media (max-width: 560px) {
+  .topo-conteudo {
+    justify-content: center;
+  }
+
+  .menu a {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  .secao {
+    padding: 36px 16px;
+  }
+
+  .hero-titulo {
+    -webkit-text-stroke: 5px var(--verde-escuro); /* contorno mais fino para não pesar na tela pequena */
+  }
+
+  .grade-cards {
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 14px;
+  }
+
+  .card {
+    padding: 12px;
+  }
+
+  .card-titulo {
+    font-size: 1rem;
+  }
+
+  .botao-favoritos {
+    width: 100%; /* o botão de favoritos ocupa a linha toda no celular */
+  }
+}
+
+/* Quem prefere menos movimento no sistema não vê as animações */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
